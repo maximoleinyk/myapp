@@ -9,7 +9,8 @@ jobs:
       - image: circleci/node:4.8.2
     working_directory: ~/my_app
     branches:
-      only: master
+      only:
+        - master
     steps:
       - checkout
       - run: echo ${MY_VAR}
