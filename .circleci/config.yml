@@ -27,7 +27,7 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: ~/my_directory/workspace
 
-      - persist_artifacts:
+      - store_artifacts:
           path: ~/my_directory/workspace/echo-output.txt
           destination: artifact-file
 
