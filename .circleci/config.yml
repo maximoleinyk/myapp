@@ -27,12 +27,7 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: ~/my_directory/workspace
 
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+      - run: cat ~/my_directory/workspace/echo-output.txt
 
 workflows:
   version: 2.1
