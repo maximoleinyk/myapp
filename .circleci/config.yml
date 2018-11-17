@@ -1,19 +1,18 @@
 version: 2.1
 
 jobs:
+
   "first step":
+    environment:
+      MY_VAR: "simple string"
     docker:
       - image: circleci/node:4.8.2
     filters:
       branches:
         - only: master
-    environment:
-      MY_VAR: "simple string"
     steps:
       - checkout
-      - run:
-          name: Print Environment variable!
-          command: echo ${MY_VAR}
+      - run: echo ${MY_VAR}
       - run: echo $MY_VAR
       - run: echo $PATH
 
