@@ -1,30 +1,38 @@
-version: 2.0
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: circleci/node:10-browsers
+    working_directory: ~/my_project_dir
 
 jobs:
 
   validate:
-    docker:
-      - image: circleci/node:10-browsers
+    executor: my-executor
     steps:
       - checkout
       - run: echo "Validating..."
+      - run: echo "Hello, world!" > echo-output.txt
+      - persist_to_workspace:
+          root: persist_to_workspace
 
   test:
-    docker:
-      - image: circleci/node:10-browsers
+    executor: my-executor
     steps:
-      - checkout
-      - run: echo "Testing..."
+      - attach_workspace:
+          at: ~/my_project_dir
+      - run: |
+          cat echo-output.txt
 
   build:
-    docker:
-      - image: circleci/node:10-browsers
+    executor: my-executor
     steps:
       - checkout
       - run: echo "Building..."
 
 workflows:
-  version: 2
+  version: 2.1
   "My project workflow":
     jobs:
       - validate:
@@ -45,4 +53,8 @@ workflows:
               only:
                 - master
           requires: 
+<<<<<<< Updated upstream
             - test
+=======
+            - test
+>>>>>>> Stashed changes
