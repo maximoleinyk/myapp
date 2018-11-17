@@ -53,8 +53,4 @@ workflows:
               only:
                 - master
           requires: 
-<<<<<<< Updated upstream
             - test
-=======
-            - test
->>>>>>> Stashed changes
