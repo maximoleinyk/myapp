@@ -7,9 +7,9 @@ jobs:
       MY_VAR: "simple string"
     docker:
       - image: circleci/node:4.8.2
-    filters:
-      branches:
-        - only: master
+    working_directory: ~/my_app
+    branches:
+      only: master
     steps:
       - checkout
       - run: echo ${MY_VAR}
