@@ -24,6 +24,7 @@ jobs:
       - run: echo "Building..."
 
 workflows:
+  version: 2
   "My project workflow":
     jobs:
       - validate
