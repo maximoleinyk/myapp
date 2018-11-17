@@ -7,9 +7,6 @@ jobs:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-<<<<<<< Updated upstream
-      - run echo "This is my message!"
-=======
       - run: 
           name: Step number one!
           command: echo "Step one"
@@ -45,4 +42,3 @@ workflows:
       - step_two:
           requires: 
             - step_one
->>>>>>> Stashed changes
