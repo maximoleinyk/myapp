@@ -11,12 +11,12 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - run: echo $CUSTOM_VARIABLE
       - run: mkdir workspace
       - run: echo "Hello, world!" > workspace/echo-output.txt
       
       - persist_to_workspace:
           root: ./workspace
-          # Must be relative path from root
           paths:
             - echo-output.txt
 
@@ -24,12 +24,11 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
           at: ~/my_directory/workspace
 
       - store_artifacts:
           path: ~/my_directory/workspace/echo-output.txt
-          destination: artifact-file
+          destination: artifact-file/
 
 workflows:
   version: 2.1
