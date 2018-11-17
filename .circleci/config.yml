@@ -13,9 +13,9 @@ jobs:
     steps:
       - checkout
       - run: echo "Validating..."
-      - run: echo "Hello, world!" > echo-output.txt
+      - run: echo "Hello, world!" > workspace/echo-output.txt
       - persist_to_workspace:
-          root: echo-output.txt
+          root: workspace
 
   test:
     executor: my-executor
