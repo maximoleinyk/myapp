@@ -16,9 +16,6 @@ jobs:
       
       - persist_to_workspace:
           root: ./workspace
-          # Must be relative path from root
-          paths:
-            - echo-output.txt
 
   downstream:
     executor: my-executor
