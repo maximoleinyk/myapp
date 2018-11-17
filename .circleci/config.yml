@@ -4,11 +4,18 @@ jobs:
   "first step":
     docker:
       - image: circleci/node:4.8.2
+    filters:
+      branches:
+        - only: master
+    environment:
+      MY_VAR: "simple string"
     steps:
       - checkout
       - run:
-          name: Print Hello World to the console!
-          command: echo "Hello world!"
+          name: Print Environment variable!
+          command: echo ${MY_VAR}
+      - run: echo $MY_VAR
+      - run: echo $PATH
 
 workflows:
   "my workflow":
