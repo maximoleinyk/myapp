@@ -1,9 +1,9 @@
-version: 2.1
+version: 2.0
 
 jobs:
   build:
     docker:
       - image: circleci/node:10-browsers
     steps:
-      - heckout
+      - checkout
       - run: echo node -v
