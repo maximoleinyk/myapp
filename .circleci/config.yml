@@ -13,6 +13,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Validating..."
+      - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output.txt
       - persist_to_workspace:
           root: workspace
