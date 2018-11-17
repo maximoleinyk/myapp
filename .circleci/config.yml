@@ -5,5 +5,5 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     steps:
-      - run: checkout
+      - heckout
       - run: echo node -v
