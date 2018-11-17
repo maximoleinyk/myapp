@@ -4,14 +4,14 @@ executors:
   my-executor:
     docker:
       - image: buildpack-deps:jessie
-    working_directory: tmp
+    working_directory: my_directory
 
 jobs:
   flow:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
+      - run: echo "Hello, world!" > workspace/echo-output.txt
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
@@ -20,7 +20,7 @@ jobs:
           root: workspace
           # Must be relative path from root
           paths:
-            - echo-output
+            - echo-output.txt
 
   downstream:
     executor: my-executor
