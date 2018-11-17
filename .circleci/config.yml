@@ -27,10 +27,22 @@ workflows:
   version: 2
   "My project workflow":
     jobs:
-      - validate
+      - validate:
+          filters:
+            branches:
+              only:
+                - master
       - test:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - validate
       - build:
+          filters:
+            branches:
+              only:
+                - master
           requires: 
             - test
