@@ -7,4 +7,4 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo node -v
+          node -v
