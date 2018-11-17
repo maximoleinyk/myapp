@@ -9,9 +9,6 @@ jobs:
       - run:
           name: Print Hello World to the console!
           command: echo "Hello world!"
-      - run: echo "Another way to print message"
-      - run: |
-          echo "Third way of printing a message"
 
 workflows:
   "my workflow":
