@@ -22,7 +22,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: ~/my_project_dir
+          at: ./workspace
       - run: |
           cat echo-output.txt
 
