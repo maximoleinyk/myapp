@@ -7,7 +7,7 @@ jobs:
       - image: circleci/node:10-browsers
     steps:
       - checkout
-      - run: ech "Validating..."
+      - run: echo "Validating..."
 
   test:
     docker:
