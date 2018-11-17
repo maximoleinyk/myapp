@@ -1,8 +1,48 @@
 version: 2
+
 jobs:
-  build:
+
+  step_one:
     docker:
-      - image: 8-alpine
+      - image: circleci/ruby:2.4.1
     steps:
       - checkout
+<<<<<<< Updated upstream
       - run echo "This is my message!"
+=======
+      - run: 
+          name: Step number one!
+          command: echo "Step one"
+      - run: mkdir -p my_workspace
+      - run: echo "Some content" > my_workspace/output
+      - persist_to_workspace:
+          root: my_workspace
+          paths:
+            - output
+      
+  step_two:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "Step two"
+      - attach_workspace:
+          at: my_workspace
+      
+      - run: |
+          if [[ $(cat my_workspace/output) == "Some content" ]]; then
+            echo "Time to share workspaces!";
+          else
+            echo "Didn't work"; exit 1
+          fi
+
+workflows:
+  version: 2
+  
+  build_my_project:
+    jobs:
+      - step_one
+      - step_two:
+          requires: 
+            - step_one
+>>>>>>> Stashed changes
