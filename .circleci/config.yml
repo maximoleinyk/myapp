@@ -10,9 +10,6 @@ jobs:
 
   prepare:
     executor: common-executor
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - run:
