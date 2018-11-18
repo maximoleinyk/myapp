@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/workingdir
 
     docker:
-      - image: circcleci/node
+      - image: circcleci/node:chakracore-8.11-browsers-legacy
 
     steps:
       - checkout
@@ -38,7 +38,7 @@ jobs:
 
   build:
     docker: 
-      - image: circcleci/node
+      - image: circcleci/node:chakracore-8.11-browsers-legacy
     steps:
       - attach_workspace:
           at: ~/workingdir/workspace
