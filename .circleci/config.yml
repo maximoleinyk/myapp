@@ -1,27 +1,23 @@
-version: 2.0
+version: 2.1
+
+executors:
+  common-executor:
+    working_directory: ~/workingdir
+    docker:
+      - image: circleci/node:10.13.0-browsers-legacy
 
 jobs:
 
   prepare:
-    working_directory: ~/workingdir
-
-    docker:
-      - image: circcleci/node:chakracore-8.11-browsers-legacy
-
+    executor: common-executor
+    branches:
+      only:
+        - master
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn dependencies
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
       - run: 
           name: Linting project...
           command: yarn lint
@@ -37,8 +33,7 @@ jobs:
             - lib
 
   build:
-    docker: 
-      - image: circcleci/node:chakracore-8.11-browsers-legacy
+    executor: common-executor
     steps:
       - attach_workspace:
           at: ~/workingdir/workspace
@@ -65,7 +60,3 @@ workflow:
       - build:
           requires:
             - prepare
-    filters:
-      branches:
-        only:
-          - master
