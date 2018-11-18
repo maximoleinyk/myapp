@@ -38,18 +38,6 @@ jobs:
 
 workflows:
 
-  # Nightly workflow
-  Nightly CI:
-    triggers: 
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - release
-    jobs:
-      - build
-
   # Daily CI workflow
   CI Build Workflow:
     jobs:
