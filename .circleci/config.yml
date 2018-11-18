@@ -25,15 +25,15 @@ jobs:
           name: Building project...
           command: yarn build
       - persist_to_workspace:
-          root: ~/workingdir/workspace
+          root: ~/workingdir
           paths:
-            - lib
+            - lib/index.js
 
   build:
     executor: common-executor
     steps:
       - attach_workspace:
-          at: ~/workingdir/workspace
+          at: ~/workingdir
       - run: ls -la 
 
 workflows:
