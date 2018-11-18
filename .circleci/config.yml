@@ -36,7 +36,7 @@ jobs:
           at: ~/workingdir/workspace
       - run: ls -la 
 
-workflow:
+workflows:
 
   # Nightly workflow
   Nightly CI:
