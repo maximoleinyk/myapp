@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/workingdir
 
     docker:
-      - image: circcleci/node:10.13.0-browsers-legacy
+      - image: circcleci/node
 
     steps:
       - checkout
@@ -38,7 +38,7 @@ jobs:
 
   build:
     docker: 
-      - image: circcleci/node:10.13.0-browsers-legacy
+      - image: circcleci/node
     steps:
       - attach_workspace:
           at: ~/workingdir/workspace
