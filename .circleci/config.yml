@@ -27,7 +27,8 @@ jobs:
       - persist_to_workspace:
           root: ~/workingdir
           paths:
-            - lib/index.js
+            - lib
+            - node_modules
 
   build:
     executor: common-executor
