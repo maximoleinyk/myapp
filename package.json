@@ -1,0 +1,28 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "simple Koa app",
+  "main": "index.js",
+  "repository": "git@me.github.com:maximoleinyk/myapp.git",
+  "author": "maxim.oleinyk@gmail.com",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@types/dotenv": "^6.1.0",
+    "dotenv": "^6.1.0",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "typescript": "^3.1.6"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.46",
+    "@types/koa-router": "^7.0.34"
+  },
+  "scripts": {
+    "lint": "echo Linting...",
+    "test": "echo Testing...",
+    "build": "tsc",
+    "start": "node lib/index.js",
+    "spin-up": "docker-compose up"
+  }
+}

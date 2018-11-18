@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  rest-service:
+    build: .
+    ports:
+      - "80:7000"

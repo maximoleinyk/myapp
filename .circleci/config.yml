@@ -1,41 +1,71 @@
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-    working_directory: ~/my_directory
+version: 2.0
 
 jobs:
-  flow:
-    executor: my-executor
+
+  prepare:
+    working_directory: ~/workingdir
+
+    docker:
+      - image: circcleci/node:10.13.0-browsers-legacy
+
     steps:
       - checkout
-      - run: echo $CUSTOM_VARIABLE
-      - run: mkdir workspace
-      - run: echo "Hello, world!" > workspace/echo-output.txt
-      
-      - persist_to_workspace:
-          root: ./workspace
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Installing dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn dependencies
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - echo-output.txt
+            - ~/.cache/yarn
+      - run: 
+          name: Linting project...
+          command: yarn lint
+      - run:
+          name: Testing project...
+          command: yarn test
+      - run:
+          name: Building project...
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/workingdir/workspace
+          paths:
+            - lib
 
-  downstream:
-    executor: my-executor
+  build:
+    docker: 
+      - image: circcleci/node:10.13.0-browsers-legacy
     steps:
       - attach_workspace:
-          at: ~/my_directory/workspace
+          at: ~/workingdir/workspace
+      - run: ls -la 
 
-      - store_artifacts:
-          path: ~/my_directory/workspace/echo-output.txt
-          destination: artifact-file/
+workflow:
 
-workflows:
-  version: 2.1
-
-  btd:
+  # Nightly workflow
+  Nightly CI:
+    triggers: 
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - release
     jobs:
-      - flow
-      - downstream:
+      - build
+
+  # Daily CI workflow
+  CI Build Workflow:
+    jobs:
+      - prepare
+      - build:
           requires:
-            - flow
+            - prepare
+    filters:
+      branches:
+        only:
+          - master
