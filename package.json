@@ -9,9 +9,11 @@
   "private": true,
   "dependencies": {
     "@types/dotenv": "^6.1.0",
+    "@types/redis": "^2.8.8",
     "dotenv": "^6.1.0",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
+    "redis": "^2.8.0",
     "typescript": "^3.1.6"
   },
   "devDependencies": {
@@ -22,7 +24,7 @@
     "lint": "echo Linting...",
     "test": "echo Testing...",
     "build": "tsc",
-    "start": "node lib/index.js",
+    "start": "yarn build && node lib/index.js",
     "spin-up": "docker-compose up"
   }
 }

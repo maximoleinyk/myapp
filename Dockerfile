@@ -1,14 +1,20 @@
-FROM node:latest
+# Use an official Python runtime as a parent image
+FROM python:2.7-slim
 
-ENV SERVICE_PORT 7000
-ENV SERVICE_HOST 0.0.0.0
+# Set the working directory to /app
+WORKDIR /app
 
-WORKDIR /workspace
-COPY . /workspace
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-RUN npm install
-RUN npm run build
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r src/requirements.txt
 
-EXPOSE 7000
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-CMD npm run start
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python", "src/app.py"]
